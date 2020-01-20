@@ -72,21 +72,46 @@ const students = [
         score: 95
     }
 ]
-const createStudentComponent = (name, subject, info) => {
-    return `
-        <div class="student">
-            <h1>${name}</h1>
-            <section>${subject}</section>
-            <aside>${info}</aside>
-        </div>
-    `
-}
 
-for (const student of students) {
-    let studentComponent = ""
-    if (student.score >= 60) {
-        studentComponent = ...
+// You want passing students' names to be green, and non-passing students to be orange.
+const createStudentComponent = (student) => {
+    if (student.score < 60) {
+        return `
+        <div class="student failing">
+            <h1>${student.name}</h1>
+            <section>${student.subject}</section>
+            <aside>${student.info}</aside>
+            <aside>${student.score}</aside>
+        </div>
+        `
     } else {
-        studentComponent = ...
+        return `
+            <div class= "student passing">
+            <h1>${student.name}</h1>
+            <section>${student.subject}</section>
+            <aside>${student.info}</aside>
+            <aside>${student.score}</aside>
+            </div>
+        `
     }
 }
+
+const studentContainer = document.querySelector("#container")
+
+
+for (let i = 0; i < students.length; i++) {
+    const student = students[i]
+    studentContainer.innerHTML += createStudentComponent(
+        student
+    )
+}
+// studentContainer.innerHTML = createStudentComponent()
+
+// for (const student of students) {
+//     let studentComponent = "name", "subject", "info", "score"
+//     if (student.score >= 60) {
+//         studentComponent = () 
+//     } else {
+//         studentComponent = 
+//     }
+// }
